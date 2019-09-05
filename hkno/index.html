@@ -1,0 +1,23 @@
+<html>  
+<body>  
+<object id="vlc" type='application/x-vlc-plugin'  width="640" height="480" 
+    pluginspage="http://www.videolan.org" 
+    codebase="http://comic.sjtu.edu.cn/vlc/cab/axvlc.cab">  		
+	    <!-- 用js 设置视频地址<param name="target" value="rtsp://admin:admin@192.168.221.189" />   -->
+		 <param name='controls' value='false' />   
+		 <param name='text' value='正在加载视频中...' />   
+		 <param name='branding' value='false' />   
+		 <embed type="application/x-google-vlc-plugin" ></embed>  
+    </object>  
+	<script type="text/javascript">
+    setTimeout(function(){
+      /* 用js 设置视频地址 setTimeout 防止组件未加载好js先执行结束，导致视频无法播放*/
+      var vlc = document.getElementById("vlc");
+      var options = new Array(":network-caching=300");//减少延迟
+      var id = vlc.playlist.add("rtsp://172.16.2.213:8554/6", "vedio", options);
+      //vlc.playlist.play()
+      vlc.playlist.playItem(id);
+    },500)
+	</script>
+</body>
+</html>
